@@ -53,7 +53,7 @@
         <div class="d-inline-flex align-items-center">
             <i class="fa fa-2x fa-map-marker-alt text-primary mr-1"></i>
             <div class="text-left">
-                <small>123 Street, New York, USA</small>
+               <small>123 Street, New York, USA</small>
             </div>
 
         </div>
@@ -419,13 +419,7 @@ window.onclick = function(event) {
 
     <!-- Modals Section --><section class="we-offer-area text-center bg-gray" id="services">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="site-heading text-center">
-                    <h2>Services We <span>Offer</span></h2>
-                </div>
-            </div>
-        </div>
+     
         <div class="row our-offer-items">
             <!-- Single Item -->
             <div class="col-md-3 col-sm-6 item">
@@ -1090,39 +1084,28 @@ window.onclick = function(event) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
-.video-container {
+  .video-container {
     display: flex;
     justify-content: space-between; /* Space between videos */
     flex-wrap: wrap; /* Allows wrapping on smaller screens */
-}
+    align-items: center; /* Align vertically */
+  }
 
-.video-item {
+  .video-item {
     flex: 1 1 23%; /* Adjust width to fit 4 videos in a row */
     margin: 0 1%; /* Space between videos */
-}
+  }
 
-.video-item iframe {
+  .video-item iframe {
     width: 100%; /* Full width of the container */
     height: auto; /* Maintain aspect ratio */
     max-height: 250px; /* Adjust max height to fit your design */
     border: none;
-}
+  }
 </style>
 
-   <style>
-        .video-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .video-container iframe {
-            margin: 10px;
-        }
-    </style>
-
-   <section id="videoCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner"align="center">
+<section id="videoCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner" align="center">
     <!-- First Video -->
     <div class="carousel-item active">
       <iframe width="697" height="392" src="https://www.youtube.com/embed/15RHy9ytzwg" 
@@ -1131,8 +1114,6 @@ window.onclick = function(event) {
       referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 
-      
-    
     <!-- Second Video -->
     <div class="carousel-item">
       <iframe width="697" height="392" src="https://www.youtube.com/embed/ctXopUrMEgw" 
@@ -1157,9 +1138,7 @@ window.onclick = function(event) {
       referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
   </div>
-
-  <!-- Controls -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#videoCarousel" data-bs-slide="prev">
+ <button class="carousel-control-prev" type="button" data-bs-target="#videoCarousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
@@ -1168,6 +1147,7 @@ window.onclick = function(event) {
     <span class="visually-hidden">Next</span>
   </button>
 </section>
+
 
 
 <!-- End Frequenty Asked Questions Section -->
@@ -1337,15 +1317,7 @@ window.onclick = function(event) {
 
 
     <footer align="center"class="footer">
-        <div class="footer-buttons">
-            <a href="#header"><button type="button" class="btn btn-primary btn-sm">Home</button></a>
-             <a href="#about"><button type="button" class="btn btn-secondary btn-sm">About-Us</button></a>
-               <a href="#why-us"><button type="button" class="btn btn-warning btn-sm">Why Us</button></a>
-             <a href="#gallery"><button type="button" class="btn btn-danger btn-sm">Gallery</button></a>
-          <a href="#contact"><button type="button" class="btn btn-info btn-sm">Contact-Us</button></a>
-               <a href="#services"><button type="button" class="btn btn-success btn-sm">Services</button></a>
-             <a href="#ClientReviews"><button type="button" class="btn btn-dark btn-sm">Reviews</button></a>
-        </div>
+       
 
 
 
@@ -1400,79 +1372,77 @@ window.onclick = function(event) {
 </div>
     </footer>
 
-    <div align="center">
-              <body onload="google_translate()">
-    <div id="translation"></div>
+ <div align="center"class="d-flex align-items-center">
+            <div id="translation"></div> <!-- Language selection dropdown -->
+        </div>
+        <!-- Include your other scripts and styles -->
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=google_translate"></script>
+<script>
+    function google_translate() {
+        var opt = {
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            pageLanguage: "en",
+        };
+        new google.translate.TranslateElement(opt, "translation");
+    }
 
-    <!-- Your other page content goes here -->
-    
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=google_translate"></script>
-    <script>
-        function google_translate() {
-            var opt = {
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                pageLanguage: "en",
-            };
-            new google.translate.TranslateElement(opt, "translation");
+    addEventListener("load", function () {
+        if (document.querySelector(".goog-te-menu-frame")) {
+            document.getElementById("translation").addEventListener("click", function () {
+                if (this.id === "translation") scrollableLanguagesList();
+            });
+            addEventListener("resize", function () {
+                if ("none" !== document.querySelector(".goog-te-menu-frame").style.display) scrollableLanguagesList();
+            });
+        }
+    });
+
+    function scrollableLanguagesList() {
+        var iframe = document.querySelector(".goog-te-menu-frame"),
+            doc = iframe.contentWindow.document,
+            div = doc.body.children[0],
+            table = div.children[0],
+            width = div.dataset.width || parseInt(div.style.width),
+            rect,
+            diff;
+
+        if (!div.dataset.width) div.dataset.width = width;
+
+        if (innerWidth < width) {
+            rect = table.getBoundingClientRect();
+            width = rect.right - rect.left;
+            diff = width - innerWidth;
+
+            div.style.width = width - diff - 24 + "px";
+            div.style.padding = "4px 0 1em 4px";
+            div.style.overflowX = "scroll";
+        } else {
+            div.style.width = "auto";
+            div.style.padding = "4px";
+            div.style.overflowX = "visible";
         }
 
-        addEventListener("load", function () {
-            if (document.querySelector(".goog-te-menu-frame")) {
-                document.getElementById("translation").addEventListener("click", function () {
-                    if (this.id === "translation") scrollableLanguagesList();
-                });
-                addEventListener("resize", function () {
-                    if ("none" !== document.querySelector(".goog-te-menu-frame").style.display) scrollableLanguagesList();
-                });
-            }
-        });
+        rect = div.getBoundingClientRect();
+        iframe.style.width = rect.right - rect.left + "px";
+        iframe.style.height = rect.bottom - rect.top + "px";
+    }
+</script>
 
-        function scrollableLanguagesList() {
-            var iframe = document.querySelector(".goog-te-menu-frame"),
-                doc = iframe.contentWindow.document,
-                div = doc.body.children[0],
-                table = div.children[0],
-                width = div.dataset.width || parseInt(div.style.width),
-                rect,
-                diff;
+<script type="text/javascript">
+    $(document).ready(function () {
+        translationTooltipsDisable();
+    });
 
-            if (!div.dataset.width) div.dataset.width = width;
+    function translationTooltipsDisable() {
+        _tipon = function () {
+            /*Don't display the tooltip*/
+        };
+        _tipoff = function () {
+            /*Don't hide the tooltip*/
+        };
+    }
+</script>
 
-            if (innerWidth < width) {
-                rect = table.getBoundingClientRect();
-                width = rect.right - rect.left;
-                diff = width - innerWidth;
-
-                div.style.width = width - diff - 24 + "px";
-                div.style.padding = "4px 0 1em 4px";
-                div.style.overflowX = "scroll";
-            } else {
-                div.style.width = "auto";
-                div.style.padding = "4px";
-                div.style.overflowX = "visible";
-            }
-
-            rect = div.getBoundingClientRect();
-            iframe.style.width = rect.right - rect.left + "px";
-            iframe.style.height = rect.bottom - rect.top + "px";
-        }
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            translationTooltipsDisable();
-        });
-
-        function translationTooltipsDisable() {
-            _tipon = function () {
-                /*Don't display the tooltip*/
-            };
-            _tipoff = function () {
-                /*Don't hide the tooltip*/
-            };
-        }
-    </script>
-</body>
 <style>
 /* General reset and box-sizing */
 * {
@@ -1509,7 +1479,7 @@ body {
     border-radius: 4px;
     color: white !important;
     font-size: 16px !important;
-    padding:5px 10px !important;
+    padding: 5px 10px !important;
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
@@ -1562,6 +1532,7 @@ iframe.goog-te-menu-frame {
     height: auto !important;
 }
 </style>
+
     </div>
 
 <!-- End #footer -->
