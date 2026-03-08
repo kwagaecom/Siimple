@@ -386,7 +386,8 @@ socialShareButtons.forEach(function (button) {
 <div id="formPopup" class="form-popup"style="background-image: url('https://media.istockphoto.com/id/1479448843/photo/girl-studying-online-using-modern-tech-at-home.webp?a=1&b=1&s=612x612&w=0&k=20&c=ZYvdiP4E6drGyx_tOOUwy1L7G1Ju4xjIAwmmm4DkUCk='); background-size: cover; background-position: center;">
   <div class="form-popup-content">
     <span class="closebtn" id="closeForm">&times;</span>
-     <form action="forms/enquiry.php" method="post" role="form" class="php-email-form">
+    <form id="contactForm">
+    <!-- <form action="forms/enquiry.php" method="post" role="form" class="php-email-form">--->
 <h4 align="center"> Enquiry Form For Home Tution</h4>
       <div class="row">
         <div class="col">
@@ -477,6 +478,29 @@ socialShareButtons.forEach(function (button) {
     </form>
   </div>
 </div>
+ <script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      const formData = new FormData(event.target);
+      const email = 'kwagaecom@gmail.com'; // Your Gmail address
+      const subject = 'Contact Form Submission'; // Subject for the email
+
+      let message = "Form Submission Details:\n\n";
+
+      // Iterate over form data and append to message
+      for (const [key, value] of formData.entries()) {
+        message += `${key}: ${value}\n`;
+      }
+
+      // Create a "mailto" URL with the pre-filled email subject and body
+      const mailtoURL = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+
+      // Open the default email client with the pre-filled email
+      window.location.href = mailtoURL;
+
+    });
+  </script>
 <style>
 
 /* Button styling */
